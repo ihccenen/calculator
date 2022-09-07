@@ -1,10 +1,13 @@
 body {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 2em;
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 800px;
     width: 100vw;
+    background-color: #703acf;
 }
 
 .container {
@@ -13,11 +16,11 @@ body {
     flex-wrap: wrap;
     gap: 5px;
     width: 415px;
+    background-color: #4D0011;
 }
 
-.display, .keys {
-    box-sizing: border-box;
-    border: 1px solid black;
+.display, .key-container {
+    background-color: #767A76;
 }
 
 .display {
@@ -25,7 +28,24 @@ body {
     width: 415px;
 }
 
-.keys {
+.key-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 80px;
     width: 100px;
+}
+
+.key {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 70px;
+    background-color: #B1D8B7;
+    border-radius: 1rem;
+}
+
+.backspace {
+    color: #4D0011;
 }
