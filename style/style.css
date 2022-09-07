@@ -10,30 +10,54 @@ body {
     background-color: #703acf;
 }
 
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 455px;
+    width: 365px;
+    background-color: #4D0011;
+}
+
 .container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 5px;
-    width: 415px;
-    background-color: #4D0011;
+    height: 425px;
+    width: 335px;
 }
 
-.display, .key-container {
+.display-container, .key-container {
     background-color: #767A76;
 }
 
-.display {
+.display-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
     height: 100px;
-    width: 415px;
+    width: 335px;
+    padding-right: 16px;
+}
+
+.display {
+    display: flex;
+    justify-content: flex-end;
+    width: 230px;
+    background-color: white;
+}
+
+.numbers {
+    padding-right: 10px;
 }
 
 .key-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80px;
-    width: 100px;
+    height: 60px;
+    width: 80px;
 }
 
 .key {
