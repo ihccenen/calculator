@@ -77,8 +77,12 @@ body {
     border-radius: 1rem;
 }
 
-.mouseover {
+.key:hover {
     background-color: #7B9780;
+}
+
+.asd {
+    background-color: #90ee90;
 }
 
 .backspace {
