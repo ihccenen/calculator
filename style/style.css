@@ -77,11 +77,11 @@ body {
     border-radius: 1rem;
 }
 
-.key:hover {
+.key-hover {
     background-color: #7B9780;
 }
 
-.asd {
+.click {
     background-color: #90ee90;
 }
 
