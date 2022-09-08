@@ -10,22 +10,24 @@ body {
     background-color: #703acf;
 }
 
-.body {
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 455px;
     width: 365px;
-    background-color: #4D0011;
+    border-radius: 15px;
+    background-color: #613659;
 }
 
-.container {
+.body {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 5px;
     height: 425px;
     width: 335px;
+    border-radius: 1rem;
 }
 
 .display-container, .key-container {
@@ -39,13 +41,15 @@ body {
     height: 100px;
     width: 335px;
     padding-right: 16px;
+    border-radius: 5px;
 }
 
 .display {
     display: flex;
     justify-content: flex-end;
-    width: 230px;
+    width: 280px;
     background-color: white;
+    border-radius: 5px;
 }
 
 .numbers {
@@ -58,6 +62,9 @@ body {
     align-items: center;
     height: 60px;
     width: 80px;
+    cursor:context-menu;
+    user-select: none;
+    border-radius: 5px;
 }
 
 .key {
@@ -71,5 +78,5 @@ body {
 }
 
 .backspace {
-    color: #4D0011;
+    color: #E42256;
 }
