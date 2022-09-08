@@ -10,7 +10,10 @@ function mousedown(e) {
     }, 100));
 }
 
+const bod = document.querySelector('body');
 const numbers = document.querySelector('.numbers-display');
 const keys = Array.from(document.querySelectorAll('.key'));
 keys.forEach(key => key.addEventListener('mouseover', mouseoverHighlight));
 keys.forEach(key => key.addEventListener('mousedown', mousedown));
+bod.style.height = window.innerHeight + 'px';
+bod.style.width = window.innerWidth + 'px';
