@@ -48,7 +48,7 @@ body {
     display: flex;
     justify-content: flex-end;
     width: 280px;
-    background-color: white;
+    background-color: #E3E8E9;
     border-radius: 5px;
 }
 
@@ -78,5 +78,5 @@ body {
 }
 
 .backspace {
-    color: #E42256;
+    color: #df5177;
 }
