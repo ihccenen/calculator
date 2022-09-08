@@ -77,6 +77,10 @@ body {
     border-radius: 1rem;
 }
 
+.mouseover {
+    background-color: #7B9780;
+}
+
 .backspace {
     color: #df5177;
 }
