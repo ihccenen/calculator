@@ -16,11 +16,13 @@ function mousedown(e) {
 }
 
 const bod = document.querySelector('body');
-const number = document.querySelector('.numbers-display');
+const numberDisplay = document.querySelector('.numbers-display');
 const keys = Array.from(document.querySelectorAll('.key'));
+let number = 0;
 
 bod.style.height = window.innerHeight + 'px';
 bod.style.width = window.innerWidth + 'px';
 window.addEventListener('resize', windowSize);
 keys.forEach(key => key.addEventListener('mouseover', mouseoverHighlight));
 keys.forEach(key => key.addEventListener('mousedown', mousedown));
+numberDisplay.textContent = number;
