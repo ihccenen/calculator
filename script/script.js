@@ -15,14 +15,40 @@ function mousedown(e) {
     }, 100));
 }
 
+function removeLeadingZero(num) {
+    const hasDot = num.split('.')
+                    .map(num => num > 0 ? num - 0 : num)
+                    .join('.');
+    const displayNumber = num.indexOf('.') === -1 ? num - 0 : hasDot;
+    
+    return displayNumber;
+}
+
+function getNumber(e) {
+    const classNumber = e.target.classList.contains('number');
+    const dot = e.target.classList.contains('dot') && numberDisplay.textContent.indexOf('.') === -1;
+    const maxLength = numberDisplay.textContent.length < 9;
+    let firstNumber = numberDisplay.textContent;
+
+    if(maxLength) {
+        if(dot) {
+            firstNumber += e.target.textContent;
+        } else if(classNumber) {
+            firstNumber += e.target.textContent;
+        }
+    }
+    
+    numberDisplay.textContent = removeLeadingZero(firstNumber);    
+}
+
 const bod = document.querySelector('body');
-const numberDisplay = document.querySelector('.numbers-display');
 const keys = Array.from(document.querySelectorAll('.key'));
-let number = 0;
+const numberDisplay = document.querySelector('.numbers-display');
 
 bod.style.height = window.innerHeight + 'px';
 bod.style.width = window.innerWidth + 'px';
 window.addEventListener('resize', windowSize);
 keys.forEach(key => key.addEventListener('mouseover', mouseoverHighlight));
 keys.forEach(key => key.addEventListener('mousedown', mousedown));
-numberDisplay.textContent = number;
+keys.forEach(key => key.addEventListener('mouseup', getNumber));
+numberDisplay.textContent = 0;
