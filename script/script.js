@@ -1,4 +1,4 @@
-function windowSize() {
+function getWindowSize() {
     bod.style.height = window.innerHeight + 'px';
     bod.style.width = window.innerWidth + 'px';
 }
@@ -42,19 +42,20 @@ function getNumber(e) {
     }
 
     if(a && op && (e.target.classList.contains('number') || e.target.classList.contains('dot'))) {
-        numberDisplay.textContent = 0;
-        b += e.target.textContent;
-        if(b.indexOf('.') === -1) {
-            b = +b;
-        }
-        numberDisplay.textContent = b;
-        console.log(b);
-    } else if(e.target.classList.contains('number')) {
         if(numberDisplay.textContent.indexOf('.') === -1) {
-            numberDisplay.textContent = +numberDisplay.textContent + +e.target.textContent;
-        } else {
-            numberDisplay.textContent += e.target.textContent;
+            numberDisplay.textContent = 0;
+            b += e.target.textContent;
+            numberDisplay.textContent = b;
+            console.log(b);
+        } else if (e.target.classList.contains('number')){
+            numberDisplay.textContent = 0;
+            b += e.target.textContent;
+            numberDisplay.textContent = b;
+            console.log(b);
         }
+    } else if(e.target.classList.contains('number')) {
+        numberDisplay.textContent += e.target.textContent;
+        console.log(numberDisplay.textContent);
     } else if(e.target.classList.contains('operator')) {
         if(!a) {
             a = numberDisplay.textContent;
@@ -76,7 +77,7 @@ let b = 0;
 
 bod.style.height = window.innerHeight + 'px';
 bod.style.width = window.innerWidth + 'px';
-window.addEventListener('resize', windowSize);
+window.addEventListener('resize', getWindowSize);
 keys.forEach(key => key.addEventListener('mouseover', mouseoverHighlight));
 keys.forEach(key => key.addEventListener('mousedown', mousedownHighlight));
 keys.forEach(key => key.addEventListener('mouseup', getNumber));
