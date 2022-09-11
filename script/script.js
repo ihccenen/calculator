@@ -44,17 +44,28 @@ function getNumber(e) {
     if(a && op && (e.target.classList.contains('number') || e.target.classList.contains('dot'))) {
         if(numberDisplay.textContent.indexOf('.') === -1) {
             numberDisplay.textContent = 0;
-            b += e.target.textContent;
+            if(e.target.textContent === '.') {
+                b += e.target.textContent
+            } else {
+                b += e.target.textContent
+                b -= 0
+            }
             numberDisplay.textContent = b;
             console.log(b);
         } else if (e.target.classList.contains('number')){
             numberDisplay.textContent = 0;
             b += e.target.textContent;
+            if(!b.includes('.')) {
+                b -= 0;
+            }
             numberDisplay.textContent = b;
             console.log(b);
         }
     } else if(e.target.classList.contains('number')) {
         numberDisplay.textContent += e.target.textContent;
+        if(numberDisplay.textContent.indexOf('.') === -1) {
+            numberDisplay.textContent -= 0;
+        }
         console.log(numberDisplay.textContent);
     } else if(e.target.classList.contains('operator')) {
         if(!a) {
