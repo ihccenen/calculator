@@ -25,49 +25,63 @@ function calculator (firstNumber, operator, secondNumber) {
     }
 }
 
-function getNumber(e) {
-    if(a && op && b && (e.target.classList.contains('operator') || e.target.classList.contains('equals'))) {
-        const result = calculator(a, op, b);
-        numberDisplay.textContent = result;
-        a = result;
-        b = 0;
-        console.log(result);
-    }
+function getResult() {
+    const result = calculator(a, op, b);
+    numberDisplay.textContent = result;
+    a = result;
+    b = 0;
+}
 
-    if(a && op && (e.target.classList.contains('number') || e.target.classList.contains('dot'))) {
-        if(numberDisplay.textContent.indexOf('.') === -1) {
-            numberDisplay.textContent = 0;
-            if(e.target.textContent === '.') {
-                b += e.target.textContent
-            } else {
-                b += e.target.textContent
-                b -= 0
-            }
-            numberDisplay.textContent = b;
-            console.log(b);
-        } else if (e.target.classList.contains('number')){
-            numberDisplay.textContent = 0;
-            b += e.target.textContent;
-            if(!b.includes('.')) {
-                b -= 0;
-            }
-            numberDisplay.textContent = b;
-            console.log(b);
+function getSecondNumber(text) {
+    if(numberDisplay.textContent.indexOf('.') === -1) {
+        numberDisplay.textContent = 0;
+        if(text === '.') {
+            b += text;
+        } else {
+            b += text;
+            b -= 0
         }
-    } else if(e.target.classList.contains('number')) {
-        numberDisplay.textContent += e.target.textContent;
+        numberDisplay.textContent = b;
+    } else {
+        numberDisplay.textContent = 0;
+        b += text;
+        if(!b.includes('.')) {
+            b -= 0;
+        }
+        numberDisplay.textContent = b;
+    }
+}
+
+function getFirstNumber(numTrue, text) {
+    if(numTrue) {
+        numberDisplay.textContent += text;
         if(numberDisplay.textContent.indexOf('.') === -1) {
             numberDisplay.textContent -= 0;
         }
-        console.log(numberDisplay.textContent);
-    } else if(e.target.classList.contains('operator')) {
+    } else {
         if(!a) {
             a = numberDisplay.textContent;
-            console.log(a);
         }
-        op = e.target.textContent;
-        console.log(op);
-    } else if(e.target.classList.contains('dot') && numberDisplay.textContent.indexOf('.') === -1) {
+        op = text;
+    }
+}
+
+function getNumber(e) {
+    const resultCheck = a && op && b && (e.target.classList.contains('operator') || e.target.classList.contains('equals'));
+    const secondNumberCheck = a && op && (e.target.classList.contains('number') || e.target.classList.contains('dot'));
+    const firstNumberCheck = e.target.classList.contains('number') || e.target.classList.contains('operator');
+    const displayNumberCheck = e.target.classList.contains('dot') && numberDisplay.textContent.indexOf('.') === -1;
+
+    if(resultCheck) {
+        getResult();
+    }
+
+    if(secondNumberCheck) {
+        getSecondNumber(e.target.textContent);
+    } else if(firstNumberCheck) {
+        const isNum = e.target.classList.contains('number');
+        getFirstNumber(isNum, e.target.textContent);
+    } else if(displayNumberCheck) {
         numberDisplay.textContent += e.target.textContent;
     }
 }
