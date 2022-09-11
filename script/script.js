@@ -3,16 +3,9 @@ function getWindowSize() {
     bod.style.width = window.innerWidth + 'px';
 }
 
-function mouseoverHighlight(e) {
-    e.target.classList.add('key-hover');
-    e.target.addEventListener('mouseout', () => e.target.classList.remove('key-hover'));
-}
-
 function mousedownHighlight(e) {
     e.target.classList.add('click');
-    e.target.addEventListener('mouseup', () => setTimeout(() => {
-        e.target.classList.remove('click');
-    }, 100));
+    e.target.addEventListener('mouseup', () => e.target.classList.remove('click'));
 }
 
 function calculator (firstNumber, operator, secondNumber) {
@@ -33,7 +26,7 @@ function calculator (firstNumber, operator, secondNumber) {
 }
 
 function getNumber(e) {
-    if(a && op && b && (e.target.classList.contains('operator') || e.target.classList.contains('equal'))) {
+    if(a && op && b && (e.target.classList.contains('operator') || e.target.classList.contains('equals'))) {
         const result = calculator(a, op, b);
         numberDisplay.textContent = result;
         a = result;
@@ -74,7 +67,7 @@ function getNumber(e) {
         }
         op = e.target.textContent;
         console.log(op);
-    } if(e.target.classList.contains('dot') && numberDisplay.textContent.indexOf('.') === -1) {
+    } else if(e.target.classList.contains('dot') && numberDisplay.textContent.indexOf('.') === -1) {
         numberDisplay.textContent += e.target.textContent;
     }
 }
@@ -89,7 +82,6 @@ let b = 0;
 bod.style.height = window.innerHeight + 'px';
 bod.style.width = window.innerWidth + 'px';
 window.addEventListener('resize', getWindowSize);
-keys.forEach(key => key.addEventListener('mouseover', mouseoverHighlight));
 keys.forEach(key => key.addEventListener('mousedown', mousedownHighlight));
 keys.forEach(key => key.addEventListener('mouseup', getNumber));
 numberDisplay.textContent = 0;
