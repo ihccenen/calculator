@@ -44,7 +44,9 @@ function getSecondNumber(text) {
         numberDisplay.textContent = b;
     } else {
         numberDisplay.textContent = 0;
-        b += text;
+        if(!(text === '.')) {
+            b += text;
+        }
         if(!b.includes('.')) {
             b -= 0;
         }
