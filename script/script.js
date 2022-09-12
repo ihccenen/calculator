@@ -42,28 +42,22 @@ function getSecondNumber(itsNumber, itsDot, text) {
         calcArray[2] += text;
     }
 
-    calcArray[2] = String(calcArray[2]).indexOf('.') === -1 ? calcArray[2] - 0 : calcArray[2];
+    calcArray[2] = calcArray[2].indexOf('.') === -1 ? calcArray[2] - 0 : calcArray[2];
     numberDisplay.textContent = calcArray[2];
 }
 
 function getFirstNumber(itsNumber, itsDot, text) {
     const maxLength = numberDisplay.textContent.length < 9;
+    const noDot = numberDisplay.textContent.indexOf('.') === -1;
+    const itsOperator = !itsNumber && !itsDot;
 
-    if(itsNumber || itsDot) {
-        if(itsNumber && maxLength) {
-            numberDisplay.textContent += text;
-        } else if (itsDot && numberDisplay.textContent.indexOf('.') === -1 && maxLength) {
-            numberDisplay.textContent += text;
-        }
-        
-        if(numberDisplay.textContent.indexOf('.') === -1) {
-            numberDisplay.textContent -= 0;
-        }
-    } else {
-        if(!calcArray[0]) {
-            calcArray[0] = numberDisplay.textContent;
-        }
-
+    if(itsDot && noDot && maxLength)  {
+        numberDisplay.textContent += text;
+    } else if(itsNumber && maxLength) {
+        numberDisplay.textContent += text;
+        numberDisplay.textContent = numberDisplay.textContent.indexOf('.') === -1 ? numberDisplay.textContent - 0 : numberDisplay.textContent;
+    } else if(itsOperator) {
+        calcArray[0] = numberDisplay.textContent;
         calcArray[1] = text;
     }
 }
