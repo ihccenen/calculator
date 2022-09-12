@@ -63,10 +63,8 @@ function getFirstNumber(itsNumber, itsDot, text) {
 }
 
 function removeLastChar() {
-    let num = numberDisplay.textContent;
-    
     if(numberDisplay.textContent.length > 1) {
-        numberDisplay.textContent = num.slice(0, -1);
+        numberDisplay.textContent = numberDisplay.textContent.slice(0, -1);
         calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
     } else {
         numberDisplay.textContent = 0;
@@ -75,15 +73,16 @@ function removeLastChar() {
 }
 
 function getInput(e) {
-    const haveClassNumber = e.target.classList.contains('number');
-    const haveClassDot = e.target.classList.contains('dot');
-    const haveClassOperator = e.target.classList.contains('operator');
-    const haveClassEquals = e.target.classList.contains('equals');
-    const haveClassClear = e.target.classList.contains('clear');
-    const haveClassBackspace = e.target.classList.contains('backspace');
-    const result = calcArray[0] && calcArray[1] && calcArray[2] && (haveClassOperator || haveClassEquals);
-    const secondNumber = calcArray[0] && calcArray[1] && (haveClassNumber || haveClassDot);
-    const firstNumber = haveClassNumber || haveClassDot || haveClassOperator;
+    const hasNum = e.target.classList.contains('number');
+    const hasDot = e.target.classList.contains('dot');
+    const hasOp = e.target.classList.contains('operator');
+    const hasEquals = e.target.classList.contains('equals');
+    const hasClear = e.target.classList.contains('clear');
+    const hasBackspace = e.target.classList.contains('backspace');
+    const hasPlusMinus = e.target.classList.contains('plus-minus');
+    const result = calcArray[0] && calcArray[1] && calcArray[2] && (hasOp || hasEquals);
+    const secondNumber = calcArray[0] && calcArray[1] && (hasNum || hasDot);
+    const firstNumber = hasNum || hasDot || hasOp;
 
     if(result) {
         const a = calculator(calcArray);
@@ -92,14 +91,18 @@ function getInput(e) {
     }
     
     if(secondNumber) {
-        getSecondNumber(haveClassNumber, haveClassDot, e.target.textContent);
+        getSecondNumber(hasNum, hasDot, e.target.textContent);
     } else if(firstNumber) {
-        getFirstNumber(haveClassNumber, haveClassDot, e.target.textContent);
-    } else if(haveClassClear) {
+        getFirstNumber(hasNum, hasDot, e.target.textContent);
+    } else if(hasBackspace) {
+        removeLastChar();
+        numberDisplay.textContent = isNaN(numberDisplay.textContent) ? 0 : numberDisplay.textContent;
+    } else if(hasClear) {
         numberDisplay.textContent = 0;
         [calcArray[0], calcArray[1], calcArray[2]] = [0, false, 0];
-    } else if(haveClassBackspace) {
-        removeLastChar();
+    } else if(hasPlusMinus) {
+        numberDisplay.textContent *= -1;
+        calcArray[2] = numberDisplay.textContent;
     }
 }
 
