@@ -62,12 +62,25 @@ function getFirstNumber(itsNumber, itsDot, text) {
     }
 }
 
+function removeLastChar() {
+    let num = numberDisplay.textContent;
+    
+    if(numberDisplay.textContent.length > 1) {
+        numberDisplay.textContent = num.slice(0, -1);
+        calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
+    } else {
+        numberDisplay.textContent = 0;
+        calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
+    }
+}
+
 function getInput(e) {
     const haveClassNumber = e.target.classList.contains('number');
     const haveClassDot = e.target.classList.contains('dot');
     const haveClassOperator = e.target.classList.contains('operator');
     const haveClassEquals = e.target.classList.contains('equals');
     const haveClassClear = e.target.classList.contains('clear');
+    const haveClassBackspace = e.target.classList.contains('backspace');
     const result = calcArray[0] && calcArray[1] && calcArray[2] && (haveClassOperator || haveClassEquals);
     const secondNumber = calcArray[0] && calcArray[1] && (haveClassNumber || haveClassDot);
     const firstNumber = haveClassNumber || haveClassDot || haveClassOperator;
@@ -85,9 +98,9 @@ function getInput(e) {
     } else if(haveClassClear) {
         numberDisplay.textContent = 0;
         [calcArray[0], calcArray[1], calcArray[2]] = [0, false, 0];
+    } else if(haveClassBackspace) {
+        removeLastChar();
     }
-
-    console.log(calcArray);
 }
 
 const bod = document.querySelector('body');
