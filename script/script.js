@@ -8,96 +8,96 @@ function mousedownHighlight(e) {
     e.target.addEventListener('mouseup', () => e.target.classList.remove('click'));
 }
 
-function calculator (firstNumber, operator, secondNumber) {
-    const a = +firstNumber;
-    const op = operator;
-    const b = +secondNumber;
+function calculator (array) {
+    const a = +array[0];
+    const op = array[1];
+    const b = +array[2];
+    let c;
 
     switch (op) {   
         case '+':
-            return a + b;
+            c = a + b;
+            break;
         case '-':
-            return  a - b;
+            c = a - b;
+            break;
         case '*':
-            return a * b;
+            c = a * b;
+            break;
         case '÷':
-            return a / b;
+            c = a / b;
+            break;
     }
+
+    return c;
 }
 
-function getResult() {
-    const result = calculator(a, op, b);
-    numberDisplay.textContent = result;
-    a = result;
-    b = 0;
-}
+function getSecondNumber(itsNumber, itsDot, text) {
+    const maxLength = String(calcArray[2]).length < 9;
+    const noDot = String(calcArray[2]).indexOf('.') === -1;
 
-function getSecondNumber(text) {
-    if(numberDisplay.textContent.indexOf('.') === -1) {
-        numberDisplay.textContent = 0;
-        if(text === '.') {
-            b += text;
-        } else {
-            b += text;
-            b -= 0
-        }
-        numberDisplay.textContent = b;
-    } else {
-        numberDisplay.textContent = 0;
-        if(!(text === '.')) {
-            b += text;
-        }
-        if(!b.includes('.')) {
-            b -= 0;
-        }
-        numberDisplay.textContent = b;
+    if(itsDot && noDot && maxLength) {
+        calcArray[2] += text;
+    } else if (itsNumber && maxLength) {
+        calcArray[2] += text;
     }
+
+    calcArray[2] = String(calcArray[2]).indexOf('.') === -1 ? calcArray[2] - 0 : calcArray[2];
+    numberDisplay.textContent = calcArray[2];
 }
 
-function getFirstNumber(numTrue, text) {
-    if(numTrue) {
-        numberDisplay.textContent += text;
+function getFirstNumber(itsNumber, itsDot, text) {
+    const maxLength = numberDisplay.textContent.length < 9;
+
+    if(itsNumber || itsDot) {
+        if(itsNumber && maxLength) {
+            numberDisplay.textContent += text;
+        } else if (itsDot && numberDisplay.textContent.indexOf('.') === -1 && maxLength) {
+            numberDisplay.textContent += text;
+        }
+        
         if(numberDisplay.textContent.indexOf('.') === -1) {
             numberDisplay.textContent -= 0;
         }
     } else {
-        if(!a) {
-            a = numberDisplay.textContent;
+        if(!calcArray[0]) {
+            calcArray[0] = numberDisplay.textContent;
         }
-        op = text;
+
+        calcArray[1] = text;
     }
 }
 
-function getNumber(e) {
-    const resultCheck = a && op && b && (e.target.classList.contains('operator') || e.target.classList.contains('equals'));
-    const secondNumberCheck = a && op && (e.target.classList.contains('number') || e.target.classList.contains('dot'));
-    const firstNumberCheck = e.target.classList.contains('number') || e.target.classList.contains('operator');
-    const displayNumberCheck = e.target.classList.contains('dot') && numberDisplay.textContent.indexOf('.') === -1;
+function getInput(e) {
+    const haveClassNumber = e.target.classList.contains('number');
+    const haveClassDot = e.target.classList.contains('dot');
+    const haveClassOperator = e.target.classList.contains('operator');
+    const haveClassEquals = e.target.classList.contains('equals');
+    const result = calcArray[0] && calcArray[1] && calcArray[2] && (haveClassOperator || haveClassEquals);
+    const secondNumber = calcArray[0] && calcArray[1] && (haveClassNumber || haveClassDot);
+    const firstNumber = haveClassNumber || haveClassDot || haveClassOperator;
 
-    if(resultCheck) {
-        getResult();
+    if(result) {
+        const a = calculator(calcArray);
+        numberDisplay.textContent = a;
+        [calcArray[0], calcArray[1], calcArray[2]] = [a, false, 0]
     }
-
-    if(secondNumberCheck) {
-        getSecondNumber(e.target.textContent);
-    } else if(firstNumberCheck) {
-        const isNum = e.target.classList.contains('number');
-        getFirstNumber(isNum, e.target.textContent);
-    } else if(displayNumberCheck) {
-        numberDisplay.textContent += e.target.textContent;
-    }
+    
+    if(secondNumber) {
+        getSecondNumber(haveClassNumber, haveClassDot, e.target.textContent);
+    } else if(firstNumber) {
+        getFirstNumber(haveClassNumber, haveClassDot, e.target.textContent);
+    } 
 }
 
 const bod = document.querySelector('body');
 const keys = Array.from(document.querySelectorAll('.key'));
 const numberDisplay = document.querySelector('.numbers-display');
-let a;
-let op;
-let b = 0;
+const calcArray = [0, false, 0];
 
 bod.style.height = window.innerHeight + 'px';
 bod.style.width = window.innerWidth + 'px';
 window.addEventListener('resize', getWindowSize);
 keys.forEach(key => key.addEventListener('mousedown', mousedownHighlight));
-keys.forEach(key => key.addEventListener('mouseup', getNumber));
+keys.forEach(key => key.addEventListener('mouseup', getInput));
 numberDisplay.textContent = 0;
