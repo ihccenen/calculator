@@ -16,10 +16,10 @@ function calculator (array) {
 
     switch (op) {   
         case '+':
-            c = a + b;
+            c = Math.round((a + b) * 100) / 100;
             break;
         case '-':
-            c = a - b;
+            c = Math.round((a - b) * 100) / 100;
             break;
         case '*':
             c = a * b;
@@ -102,7 +102,7 @@ function getInput(e) {
         [calcArray[0], calcArray[1], calcArray[2]] = [0, false, 0];
     } else if(hasPlusMinus) {
         numberDisplay.textContent *= -1;
-        calcArray[2] = numberDisplay.textContent;
+        calcArray[2] = calcArray[2] !== 0 ? numberDisplay.textContent : 0;
     }
 }
 
