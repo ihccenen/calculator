@@ -1,13 +1,3 @@
-function getWindowSize() {
-    bod.style.height = window.innerHeight + 'px';
-    bod.style.width = window.innerWidth + 'px';
-}
-
-function mousedownHighlight(e) {
-    e.target.classList.add('click');
-    e.target.addEventListener('mouseup', () => e.target.classList.remove('click'));
-}
-
 function calculator (array) {
     const a = +array[0];
     const op = array[1] === "/" ? '÷' : array[1];
@@ -106,10 +96,10 @@ function getInput(e) {
     }
     
     if(secondNumber) {
-        const text = e.key ? e.key : e.target.textContent;
+        const text = e.key || e.target.textContent;
         getSecondNumber(hasNum, hasDot, text);
     } else if(firstNumber) {
-        const text = e.key ? e.key : e.target.textContent;
+        const text = e.key || e.target.textContent;
         getFirstNumber(hasNum, hasDot, text);
     } else if(hasBackspace || hasClear) {
         clearDisplay(hasClear, hasBackspace);
@@ -131,9 +121,6 @@ const keys = Array.from(document.querySelectorAll('.key'));
 const numberDisplay = document.querySelector('.numbers-display');
 const calcArray = [0, false, 0];
 
-bod.style.height = window.innerHeight + 'px';
-bod.style.width = window.innerWidth + 'px';
 window.addEventListener('resize', getWindowSize);
 window.addEventListener('keydown', getInput);
-keys.forEach(key => key.addEventListener('mousedown', mousedownHighlight));
 keys.forEach(key => key.addEventListener('mouseup', getInput));
