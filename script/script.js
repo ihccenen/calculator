@@ -10,7 +10,7 @@ function mousedownHighlight(e) {
 
 function calculator (array) {
     const a = +array[0];
-    const op = array[1];
+    const op = array[1] === "/" ? '÷' : array[1];
     const b = +array[2];
     let c;
 
@@ -86,14 +86,14 @@ function getPercent() {
 }
 
 function getInput(e) {
-    const hasNum = e.target.classList.contains('number');
-    const hasDot = e.target.classList.contains('dot');
-    const hasOp = e.target.classList.contains('operator');
-    const hasEquals = e.target.classList.contains('equals');
+    const hasNum = e.target.classList.contains('number') || e.key >= 0;
+    const hasDot = e.target.classList.contains('dot') || e.key === '.';
+    const hasEquals = e.target.classList.contains('equals') || e.key === '=' || e.key === 'Enter';
+    const hasOp = e.target.classList.contains('operator') || ['+', '-', '*', '/'].indexOf(e.key) !== -1;
+    const hasBackspace = e.target.classList.contains('backspace') || e.key === 'Backspace';
+    const hasPercent = e.target.classList.contains('percent') || e.key === '%';
     const hasClear = e.target.classList.contains('clear');
-    const hasBackspace = e.target.classList.contains('backspace');
     const hasPlusMinus = e.target.classList.contains('plus-minus');
-    const hasPercent = e.target.classList.contains('percent');
     const result = calcArray[0] && calcArray[1] && calcArray[2] && (hasOp || hasEquals);
     const secondNumber = calcArray[0] && calcArray[1] && (hasNum || hasDot);
     const firstNumber = hasNum || hasDot || hasOp;
@@ -102,12 +102,15 @@ function getInput(e) {
         const a = calculator(calcArray);
         numberDisplay.textContent = a;
         [calcArray[0], calcArray[1], calcArray[2]] = [a, false, 0];
+        console.log(a);
     }
     
     if(secondNumber) {
-        getSecondNumber(hasNum, hasDot, e.target.textContent);
+        const text = e.key ? e.key : e.target.textContent;
+        getSecondNumber(hasNum, hasDot, text);
     } else if(firstNumber) {
-        getFirstNumber(hasNum, hasDot, e.target.textContent);
+        const text = e.key ? e.key : e.target.textContent;
+        getFirstNumber(hasNum, hasDot, text);
     } else if(hasBackspace || hasClear) {
         clearDisplay(hasClear, hasBackspace);
     } else if(hasPercent) {
@@ -115,6 +118,11 @@ function getInput(e) {
     } else if(hasPlusMinus) {
         numberDisplay.textContent *= -1;
         calcArray[2] = calcArray[2] !== 0 ? numberDisplay.textContent : 0;
+    }
+
+
+    if(hasNum || hasDot || hasOp || hasBackspace || hasEquals || hasPercent) {
+        e.preventDefault();
     }
 }
 
@@ -126,5 +134,6 @@ const calcArray = [0, false, 0];
 bod.style.height = window.innerHeight + 'px';
 bod.style.width = window.innerWidth + 'px';
 window.addEventListener('resize', getWindowSize);
+window.addEventListener('keydown', getInput);
 keys.forEach(key => key.addEventListener('mousedown', mousedownHighlight));
 keys.forEach(key => key.addEventListener('mouseup', getInput));
