@@ -62,7 +62,7 @@ function getFirstNumber(itsNumber, itsDot, text) {
     }
 }
 
-function clearDisplay(itsBackspace ,itsClear) {
+function clearDisplay(itsClear, itsBackspace) {
     if(numberDisplay.textContent.length > 1 && itsBackspace) {
         numberDisplay.textContent = numberDisplay.textContent.slice(0, -1);
         calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
@@ -109,7 +109,7 @@ function getInput(e) {
     } else if(firstNumber) {
         getFirstNumber(hasNum, hasDot, e.target.textContent);
     } else if(hasBackspace || hasClear) {
-        clearDisplay(hasBackspace, hasClear);
+        clearDisplay(hasClear, hasBackspace);
     } else if(hasPercent) {
         getPercent();
     } else if(hasPlusMinus) {
