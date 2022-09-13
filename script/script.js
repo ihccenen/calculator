@@ -121,7 +121,7 @@ function getInput(e) {
 }
 
 const bod = document.querySelector('body');
-const keys = Array.from(document.querySelectorAll('.key-container'));
+const keys = Array.from(document.querySelectorAll('.key'));
 const numberDisplay = document.querySelector('.numbers-display');
 const calcArray = [0, false, 0];
 

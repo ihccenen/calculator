@@ -10,7 +10,7 @@ body {
     flex-shrink: 0;
 }
 
-.key-container,
+.key,
 .display-container {
     display: flex;
     justify-content: center;
@@ -33,7 +33,7 @@ body {
     border: 1px solid black;
 }
 
-.key-container {
+.key {
     width: 100px;
     height: 75px;
     box-sizing: border-box;
