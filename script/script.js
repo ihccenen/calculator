@@ -1,3 +1,7 @@
+function getWindowSize() {
+    bod.style.height = window.innerHeight + 'px';
+}
+
 function calculator (array) {
     const a = +array[0];
     const op = array[1] === "/" ? '÷' : array[1];
@@ -117,10 +121,11 @@ function getInput(e) {
 }
 
 const bod = document.querySelector('body');
-const keys = Array.from(document.querySelectorAll('.key'));
+const keys = Array.from(document.querySelectorAll('.key-container'));
 const numberDisplay = document.querySelector('.numbers-display');
 const calcArray = [0, false, 0];
 
+bod.style.height = window.innerHeight + 'px';
 window.addEventListener('resize', getWindowSize);
 window.addEventListener('keydown', getInput);
 keys.forEach(key => key.addEventListener('mouseup', getInput));
