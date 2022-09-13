@@ -11,7 +11,7 @@ body {
 }
 
 .key,
-.display-container {
+.numbers-display {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,7 +23,7 @@ body {
     gap: 20px;
 }
 
-.display-container {
+.numbers-display {
     font-size: 2.3em;
     justify-content: flex-end;
     padding-right: 20px;
