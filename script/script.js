@@ -62,13 +62,26 @@ function getFirstNumber(itsNumber, itsDot, text) {
     }
 }
 
-function removeLastChar() {
-    if(numberDisplay.textContent.length > 1) {
+function clearDisplay(itsBackspace ,itsClear) {
+    if(numberDisplay.textContent.length > 1 && itsBackspace) {
         numberDisplay.textContent = numberDisplay.textContent.slice(0, -1);
         calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
-    } else {
+    } else if(itsBackspace) {
         numberDisplay.textContent = 0;
         calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
+    } else if(itsClear) {
+        numberDisplay.textContent = 0;
+        [calcArray[0], calcArray[1], calcArray[2]] = [0, false, 0];
+    }
+
+    numberDisplay.textContent = isNaN(numberDisplay.textContent) ? 0 : numberDisplay.textContent;
+}
+
+function getPercent() {
+    numberDisplay.textContent /= 100;
+
+    if(calcArray[2] !== 0) {
+        numberDisplay.textContent = calcArray[0] - (calcArray[0] * (calcArray[2] / 100));
     }
 }
 
@@ -80,6 +93,7 @@ function getInput(e) {
     const hasClear = e.target.classList.contains('clear');
     const hasBackspace = e.target.classList.contains('backspace');
     const hasPlusMinus = e.target.classList.contains('plus-minus');
+    const hasPercent = e.target.classList.contains('percent');
     const result = calcArray[0] && calcArray[1] && calcArray[2] && (hasOp || hasEquals);
     const secondNumber = calcArray[0] && calcArray[1] && (hasNum || hasDot);
     const firstNumber = hasNum || hasDot || hasOp;
@@ -94,12 +108,10 @@ function getInput(e) {
         getSecondNumber(hasNum, hasDot, e.target.textContent);
     } else if(firstNumber) {
         getFirstNumber(hasNum, hasDot, e.target.textContent);
-    } else if(hasBackspace) {
-        removeLastChar();
-        numberDisplay.textContent = isNaN(numberDisplay.textContent) ? 0 : numberDisplay.textContent;
-    } else if(hasClear) {
-        numberDisplay.textContent = 0;
-        [calcArray[0], calcArray[1], calcArray[2]] = [0, false, 0];
+    } else if(hasBackspace || hasClear) {
+        clearDisplay(hasBackspace, hasClear);
+    } else if(hasPercent) {
+        getPercent();
     } else if(hasPlusMinus) {
         numberDisplay.textContent *= -1;
         calcArray[2] = calcArray[2] !== 0 ? numberDisplay.textContent : 0;
@@ -116,4 +128,3 @@ bod.style.width = window.innerWidth + 'px';
 window.addEventListener('resize', getWindowSize);
 keys.forEach(key => key.addEventListener('mousedown', mousedownHighlight));
 keys.forEach(key => key.addEventListener('mouseup', getInput));
-numberDisplay.textContent = 0;
