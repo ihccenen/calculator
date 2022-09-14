@@ -63,21 +63,21 @@ function getFirstNumber(itsNumber, itsDot, text) {
 }
 
 function clearDisplay(itsClear, itsBackspace) {
-    if(numberDisplay.textContent.length > 1 && itsBackspace) {
-        numberDisplay.textContent = numberDisplay.textContent.slice(0, -1);
+    const num = numberDisplay.textContent;
+
+    if(itsBackspace) {
+        // if it has only one number set to 0
+        numberDisplay.textContent = num.length > 1 ? num.slice(0, -1) : 0;
 
         // remove last character if it's the second number
-        calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
-    } else if(itsBackspace) {
-        numberDisplay.textContent = 0;
-
-        // remove last character if it's the second number
-        calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : calcArray[0];
+        calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : 0;
     } else if(itsClear) {
         numberDisplay.textContent = 0;
+
+        // reset calcArray
         [calcArray[0], calcArray[1], calcArray[2]] = [0, false, 0];
     }
-
+    
     // if the last character is + or - change it to 0
     numberDisplay.textContent = isNaN(numberDisplay.textContent) ? 0 : numberDisplay.textContent;
 }
@@ -93,8 +93,6 @@ function getPercent() {
 }
 
 function getInput(e) {
-    e.preventDefault();
-
     // check which class the div clicked or key pressed has
     const hasNum = e.target.classList.contains('number') || e.key >= 0;
     const hasDot = e.target.classList.contains('dot') || e.key === '.';
@@ -104,7 +102,7 @@ function getInput(e) {
     const hasPercent = e.target.classList.contains('percent') || e.key === '%';
     const hasClear = e.target.classList.contains('clear');
     const hasPlusMinus = e.target.classList.contains('plus-minus');
-
+    
     // set conditions
     const firstNumber = hasNum || hasDot || hasOp;
     const result = calcArray[0] && calcArray[1] && calcArray[2] && (hasOp || hasEquals);
@@ -112,15 +110,16 @@ function getInput(e) {
     
     // get text from the div clicked or the key pressed
     const text = e.key || e.target.textContent;
-
+    
     // run the one which is true of result, firstNumber or secondNumber
     // or the one which has the right class or key pressed
     if(result) {
         const total = calculator(calcArray);
+        const operator = hasOp ? (e.key || e.target.textContent) : false;
         numberDisplay.textContent = total;
-
+        
         // set calcArray to be: total, text if it's an operator and 0
-        [calcArray[0], calcArray[1], calcArray[2]] = [total, text !== '=', 0];
+        [calcArray[0], calcArray[1], calcArray[2]] = [total, operator, 0];
     } else if(secondNumber) {
         getSecondNumber(hasNum, hasDot, text);
     } else if(firstNumber) {
@@ -132,11 +131,14 @@ function getInput(e) {
     } else if(hasPlusMinus) {
         // convert number to negative or positive
         numberDisplay.textContent *= -1;
-
+        
         // if it's the second number
         calcArray[2] = calcArray[2] !== 0 ? numberDisplay.textContent : 0;
     }
-
+    
+    if(hasBackspace || hasOp) {
+        e.preventDefault();
+    }
     console.log(calcArray);
 }
 
