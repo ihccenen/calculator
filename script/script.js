@@ -139,7 +139,6 @@ function getInput(e) {
     if(hasBackspace || hasOp) {
         e.preventDefault();
     }
-    console.log(calcArray);
 }
 
 const bod = document.querySelector('body');
