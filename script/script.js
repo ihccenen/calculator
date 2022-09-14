@@ -34,9 +34,9 @@ function getSecondNumber(itsNumber, itsDot, text) {
         calcArray[2] += text;
     } else if (itsNumber && maxLength) {
         calcArray[2] += text;
+        calcArray[2] = calcArray[2].indexOf('.') === -1 ? calcArray[2] - 0 : calcArray[2];
     }
 
-    calcArray[2] = calcArray[2].indexOf('.') === -1 ? calcArray[2] - 0 : calcArray[2];
     numberDisplay.textContent = calcArray[2];
 }
 
@@ -96,7 +96,6 @@ function getInput(e) {
         const a = calculator(calcArray);
         numberDisplay.textContent = a;
         [calcArray[0], calcArray[1], calcArray[2]] = [a, false, 0];
-        console.log(a);
     }
     
     if(secondNumber) {
