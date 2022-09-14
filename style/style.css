@@ -45,7 +45,7 @@ body {
 .key {
     font-size: 20px;
     width: 75px;
-    height: 75px;
+    height: 60px;
     user-select: none;
     background-color: #C0C0C0;
 }
