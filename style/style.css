@@ -20,6 +20,7 @@ body {
 .container {
     height: auto;
     width: 330px;
+    height: 500px;
     flex-shrink: 0;
     gap: 5px;
     background-color: #868B8E;
@@ -30,11 +31,10 @@ body {
     height: 10px;
 }
 
-
 .numbers-display{
     font-size: 35px;
-    width: 315px;
-    height: 90px;
+    width: 96%;
+    height: 20%;
     word-break: break-word;
     justify-content: flex-end;
     text-align: end;
@@ -44,8 +44,9 @@ body {
 
 .key {
     font-size: 20px;
-    width: 75px;
-    height: 60px;
+    width: 23%;
+    height: 13%;
+    cursor:pointer;
     user-select: none;
     background-color: #C0C0C0;
 }
