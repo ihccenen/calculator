@@ -30,7 +30,7 @@ function getSecondNumber(itsNumber, itsDot, text) {
     const maxLength = String(calcArray[2]).length < 9;
     const noDot = String(calcArray[2]).indexOf('.') === -1;
 
-    if(itsDot && noDot && maxLength) {
+    if (itsDot && noDot && maxLength) {
         calcArray[2] += text;
     } else if (itsNumber && maxLength) {
         calcArray[2] += text;
@@ -47,14 +47,14 @@ function getFirstNumber(itsNumber, itsDot, text) {
     const noDot = numberDisplay.textContent.indexOf('.') === -1;
     const itsOperator = !itsNumber && !itsDot;
 
-    if(itsDot && noDot && maxLength)  {
+    if (itsDot && noDot && maxLength)  {
         numberDisplay.textContent += text;
-    } else if(itsNumber && maxLength) {
+    } else if (itsNumber && maxLength) {
         numberDisplay.textContent += text;
 
         // remove leading zeros if there's no dot
         numberDisplay.textContent = numberDisplay.textContent.indexOf('.') === -1 ? numberDisplay.textContent - 0 : numberDisplay.textContent;
-    } else if(itsOperator) {
+    } else if (itsOperator) {
 
         // save first number and operator
         calcArray[0] = numberDisplay.textContent;
@@ -65,13 +65,13 @@ function getFirstNumber(itsNumber, itsDot, text) {
 function clearDisplay(itsClear, itsBackspace) {
     const num = numberDisplay.textContent;
 
-    if(itsBackspace) {
+    if (itsBackspace) {
         // if it has only one number set to 0
         numberDisplay.textContent = num.length > 1 ? num.slice(0, -1) : 0;
 
         // remove last character if it's the second number
         calcArray[2] = calcArray[2] > 0 ? numberDisplay.textContent : 0;
-    } else if(itsClear) {
+    } else if (itsClear) {
         numberDisplay.textContent = 0;
 
         // reset calcArray
@@ -86,7 +86,7 @@ function getPercent() {
     numberDisplay.textContent /= 100;
     
     // if it's used on the second number 
-    if(calcArray[2] !== 0) {
+    if (calcArray[2] !== 0) {
         // calculate from the first number and subtract
         numberDisplay.textContent = calcArray[0] - (calcArray[0] * (calcArray[2] / 100));
     }
@@ -108,27 +108,27 @@ function getInput(e) {
     // get the key pressed or the div text content
     const text = e.key || e.target.textContent;
     
-    if(result) {
+    if (result) {
         const total = calculator(calcArray); 
         const operator = hasOp ? (e.key || e.target.textContent) : false;
         numberDisplay.textContent = String(total).indexOf('.') === -1 ? total : total.toFixed(8) * 1;
         [calcArray[0], calcArray[1], calcArray[2]] = [total, operator, 0];
-    } else if(secondNumber) {
+    } else if (secondNumber) {
         getSecondNumber(hasNum, hasDot, text);
-    } else if(firstNumber) {
+    } else if (firstNumber) {
         getFirstNumber(hasNum, hasDot, text);
-    } else if(hasBackspace || hasClear) {
+    } else if (hasBackspace || hasClear) {
         clearDisplay(hasClear, hasBackspace);
-    } else if(hasPercent) {
+    } else if (hasPercent) {
         getPercent();
-    } else if(hasPlusMinus) {
+    } else if (hasPlusMinus) {
         numberDisplay.textContent *= -1;
         
         // if it's the second number
         calcArray[2] = calcArray[2] !== 0 ? numberDisplay.textContent : 0;
     }
     
-    if(hasBackspace || hasOp) {
+    if (hasBackspace || hasOp) {
         e.preventDefault();
     }
 
@@ -137,7 +137,7 @@ function getInput(e) {
 
 const bod = document.querySelector('body');
 const keys = Array.from(document.querySelectorAll('.key'));
-const numberDisplay = document.querySelector('.numbers-display');
+const numberDisplay = document.querySelector('.display');
 
 // store first number, operator and second number
 const calcArray = [0, false, 0];
