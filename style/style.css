@@ -41,6 +41,10 @@ body,
     background-color: #e9eef159;
 }
 
+.equals {
+    background-color: #B1D8B7;
+}
+
 .key:hover {
     background-color: #F77CBA;
 }
