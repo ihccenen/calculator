@@ -16,33 +16,31 @@ body,
 }
 
 .container {
-    max-width: 330px;
+    max-width: 430px;
     flex-wrap: wrap;
     background-color: #9e9effb3;
 }
 
 .display {
-    background-color: #e9eef1;
-}
-
-.key {
-    background-color: #e9eef159;
-}
-
-.display {
-    font-size: 2.7rem;
+    font-size: 3.5rem;
     width: 100%;
     justify-content: end;
     text-align: right;
     padding: 0.5em 0.2em;
     margin: 1.2rem;
     word-break: break-word;
+    background-color: #e9eef1;
 }
 
 .key {
-    font-size: 2rem;
+    font-size: 2.3rem;
     width: 18%;
-    margin: 0.8rem 0.571rem;
+    margin: 0.8rem 0.85rem;
     cursor: pointer;
     user-select: none;
+    background-color: #e9eef159;
+}
+
+.key:hover {
+    background-color: #F77CBA;
 }

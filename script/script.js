@@ -2,6 +2,14 @@ function getWindowSize() {
     bod.style.height = window.innerHeight + 'px';
 }
 
+function highlightKey(e) {
+    if (e.button === 0) {
+        e.target.style.backgroundColor = '#FC60AE';
+    
+        window.addEventListener('mouseup', () => keys.forEach(key => key.style.backgroundColor = ''));
+    }
+}
+
 function calculator (array) {
     const a = +array[0];
     const op = array[1] === "/" ? '÷' : array[1];
@@ -131,8 +139,6 @@ function getInput(e) {
     if (hasBackspace || hasOp) {
         e.preventDefault();
     }
-
-    console.log(calcArray)
 }
 
 const bod = document.querySelector('body');
@@ -142,7 +148,8 @@ const numberDisplay = document.querySelector('.display');
 // store first number, operator and second number
 const calcArray = [0, false, 0];
 
+keys.forEach(key => key.addEventListener('click', getInput));
+keys.forEach(key => key.addEventListener('mousedown', highlightKey));
 bod.style.height = window.innerHeight + 'px';
 window.addEventListener('resize', getWindowSize);
 window.addEventListener('keydown', getInput);
-keys.forEach(key => key.addEventListener('mouseup', getInput));
