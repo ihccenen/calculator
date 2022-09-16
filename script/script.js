@@ -118,6 +118,7 @@ function clearDisplay(itsClear, itsBackspace) {
 }
 
 function getInput(e) {
+    const operatorArray = ["+", "-", "*", "/"];
     const hasNum = e.target.classList.contains("number") || e.key >= 0;
     const hasDot = e.target.classList.contains("dot") || e.key === ".";
     const hasEquals =
@@ -126,7 +127,7 @@ function getInput(e) {
         e.key === "Enter";
     const hasOp =
         e.target.classList.contains("operator") ||
-        ["+", "-", "*", "/"].indexOf(e.key) !== -1;
+        operatorArray.indexOf(e.key) !== -1;
     const hasBackspace =
         e.target.classList.contains("backspace") || e.key === "Backspace";
     const hasPercent = e.target.classList.contains("percent") || e.key === "%";
