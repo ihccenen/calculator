@@ -1,13 +1,10 @@
-body {
-    font-family: Tahoma, sans-serif;
-    color: #383838;
-    background-color: #EAE7FA;
-}
-
 body,
 .container,
 .display,
 .key {
+    font-family: "Roboto Mono", monospace;
+    color: #383838;
+    background-color: #eae7fa;
     margin: 0;
     display: flex;
     justify-content: center;
@@ -18,7 +15,7 @@ body,
 .display,
 .key {
     box-sizing: border-box;
-    border: 1px solid #665A81;
+    border: 1px solid #665a81;
     border-radius: 10px;
 }
 
@@ -49,9 +46,9 @@ body,
 }
 
 .equals {
-    background-color: #B1D8B7;
+    background-color: #b1d8b7;
 }
 
 .key:hover {
-    background-color: #F77CBA;
+    background-color: #f77cba;
 }
