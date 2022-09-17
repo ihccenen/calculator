@@ -2,16 +2,6 @@ function getWindowSize() {
     bod.style.height = window.innerHeight + "px";
 }
 
-function highlightKey(e) {
-    if (e.button === 0) {
-        e.target.style.backgroundColor = "#FC60AE";
-
-        window.addEventListener("mouseup", () =>
-            keys.forEach((key) => (key.style.backgroundColor = ""))
-        );
-    }
-}
-
 function calculator(array) {
     const a = +array[0];
     const op = array[1] === "/" ? "÷" : array[1];
@@ -48,9 +38,7 @@ function getFirstNumber(itsNumber, itsDot, text) {
 
         // remove leading zeros if there's no dot
         numberDisplay.textContent =
-            numberDisplay.textContent.indexOf(".") === -1
-                ? numberDisplay.textContent - 0
-                : numberDisplay.textContent;
+            numberDisplay.textContent.indexOf(".") === -1 ? numberDisplay.textContent - 0 : numberDisplay.textContent;
     } else if (itsOperator) {
         // save first number and operator
         calcArray[0] = numberDisplay.textContent;
@@ -68,8 +56,7 @@ function getSecondNumber(itsNumber, itsDot, text) {
         calcArray[2] += text;
 
         // remove leading zeros if there's no dot
-        calcArray[2] =
-            calcArray[2].indexOf(".") === -1 ? calcArray[2] - 0 : calcArray[2];
+        calcArray[2] = calcArray[2].indexOf(".") === -1 ? calcArray[2] - 0 : calcArray[2];
     }
 
     numberDisplay.textContent = calcArray[2];
@@ -91,8 +78,7 @@ function getPercent() {
     // if it's used on the second number
     if (calcArray[2] !== 0) {
         // calculate from the first number and subtract
-        numberDisplay.textContent =
-            calcArray[0] - calcArray[0] * (calcArray[2] / 100);
+        numberDisplay.textContent = calcArray[0] - calcArray[0] * (calcArray[2] / 100);
     }
 }
 
@@ -112,43 +98,29 @@ function clearDisplay(itsClear, itsBackspace) {
     }
 
     // if the last character is + or - change it to 0
-    numberDisplay.textContent = isNaN(numberDisplay.textContent)
-        ? 0
-        : numberDisplay.textContent;
+    numberDisplay.textContent = isNaN(numberDisplay.textContent) ? 0 : numberDisplay.textContent;
 }
 
 function getInput(e) {
     const operatorArray = ["+", "-", "*", "/"];
     const hasNum = e.target.classList.contains("number") || e.key >= 0;
     const hasDot = e.target.classList.contains("dot") || e.key === ".";
-    const hasEquals =
-        e.target.classList.contains("equals") ||
-        e.key === "=" ||
-        e.key === "Enter";
-    const hasOp =
-        e.target.classList.contains("operator") ||
-        operatorArray.indexOf(e.key) !== -1;
-    const hasBackspace =
-        e.target.classList.contains("backspace") || e.key === "Backspace";
+    const hasEquals = e.target.classList.contains("equals") || e.key === "=" || e.key === "Enter";
+    const hasOp = e.target.classList.contains("operator") || operatorArray.indexOf(e.key) !== -1;
+    const hasBackspace = e.target.classList.contains("backspace") || e.key === "Backspace";
     const hasPercent = e.target.classList.contains("percent") || e.key === "%";
     const hasClear = e.target.classList.contains("clear");
     const hasPlusMinus = e.target.classList.contains("plus-minus");
     const firstNumber = hasNum || hasDot || hasOp;
-    const secondNumber =
-        calcArray[0] !== 0 && calcArray[1] !== null && (hasNum || hasDot);
-    const result =
-        calcArray[0] !== 0 &&
-        calcArray[1] !== null &&
-        calcArray[2] !== 0 &&
-        (hasOp || hasEquals);
+    const secondNumber = calcArray[0] !== 0 && calcArray[1] !== null && (hasNum || hasDot);
+    const result = calcArray[0] !== 0 && calcArray[1] !== null && calcArray[2] !== 0 && (hasOp || hasEquals);
 
     const text = e.key || e.target.textContent;
 
     if (result) {
         const total = calculator(calcArray);
         const operator = hasOp ? e.key || e.target.textContent : null;
-        numberDisplay.textContent =
-            String(total).indexOf(".") === -1 ? total : total.toFixed(8) * 1;
+        numberDisplay.textContent = String(total).indexOf(".") === -1 ? total : total.toFixed(8) * 1;
 
         [calcArray[0], calcArray[1], calcArray[2]] = [total, operator, 0];
     } else if (secondNumber) {
@@ -175,7 +147,6 @@ const numberDisplay = document.querySelector(".display");
 const calcArray = [0, false, 0];
 
 keys.forEach((key) => key.addEventListener("click", getInput));
-keys.forEach((key) => key.addEventListener("mousedown", highlightKey));
 bod.style.height = window.innerHeight + "px";
 window.addEventListener("resize", getWindowSize);
 window.addEventListener("keydown", getInput);
