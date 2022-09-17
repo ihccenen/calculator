@@ -50,9 +50,9 @@ body,
 }
 
 .key:hover {
-    background-color: #abb3c2;
+    background-color: #9e9eff;
 }
 
 .key:active {
-    background-color: #e0e3f9;
+    background-color: #8e8ee6;
 }
