@@ -1,3 +1,17 @@
+function getSecondNumber(char) {
+    if (String(calcArr[2]).length >= 9) return;
+
+    calcArr[2] = getNumber((calcArr[2] += char));
+
+    return (display.textContent = calcArr[2]);
+}
+
+function getOperator(e) {
+    calcArr[0] = display.textContent;
+    calcArr[1] = e.target.textContent;
+    calcArr[2] = 0;
+}
+
 function removeLeadingZero(string) {
     const str = string.split('.');
 
@@ -25,14 +39,25 @@ function getNumber(string) {
 }
 
 function showDisplay(e) {
+    console.log(display.textContent.length);
+    console.log(String(calcArr[0]).length);
+    console.log(String(calcArr[2]).length);
     if (display.textContent.length < 9) {
         display.textContent += e.target.textContent;
     }
 
-    display.textContent = getNumber(display.textContent);
+    if (calcArr[2] !== null) {
+        getSecondNumber(e.target.textContent);
+        return;
+    }
+
+    return (display.textContent = getNumber(display.textContent));
 }
 
 const display = document.querySelector('.display');
-const keys = Array.from(document.querySelectorAll('.key'));
+const numKeys = Array.from(document.querySelectorAll('.number, .dot'));
+const operatorKey = Array.from(document.querySelectorAll('.operator'));
+const calcArr = [null, null, null];
 
-keys.forEach((key) => key.addEventListener('click', showDisplay));
+numKeys.forEach((key) => key.addEventListener('click', showDisplay));
+operatorKey.forEach((key) => key.addEventListener('click', getOperator));
