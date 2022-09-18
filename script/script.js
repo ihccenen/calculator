@@ -6,7 +6,7 @@ function removeLeadingZero(string) {
     return str.join('.');
 }
 
-function showNumber(string) {
+function getNumber(string) {
     const num = string.split('').reduce((arr, current) => {
         if (current >= 0) {
             arr.push(current);
@@ -24,12 +24,12 @@ function showNumber(string) {
     return num.join('');
 }
 
-function getInput(e) {
+function showInput(e) {
     if (display.textContent.length < 9) {
         display.textContent += e.target.textContent;
     }
 
-    display.textContent = showNumber(display.textContent);
+    display.textContent = getNumber(display.textContent);
 }
 
 const display = document.querySelector('.display');
