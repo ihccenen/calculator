@@ -10,7 +10,7 @@ function showNumber(string) {
     const num = string.split('').reduce((arr, current) => {
         if (current >= 0) {
             arr.push(current);
-        } else if (current === '.' && arr.indexOf('.') === -1) {
+        } else if (current === '.' && arr.indexOf('.') === -1 && arr.length < 8) {
             arr.push(current);
         }
 
@@ -25,7 +25,9 @@ function showNumber(string) {
 }
 
 function getInput(e) {
-    display.textContent += e.target.textContent;
+    if (display.textContent.length < 9) {
+        display.textContent += e.target.textContent;
+    }
 
     display.textContent = showNumber(display.textContent);
 }
