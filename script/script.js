@@ -24,7 +24,7 @@ function getNumber(string) {
     return num.join('');
 }
 
-function showInput(e) {
+function showDisplay(e) {
     if (display.textContent.length < 9) {
         display.textContent += e.target.textContent;
     }
@@ -35,4 +35,4 @@ function showInput(e) {
 const display = document.querySelector('.display');
 const keys = Array.from(document.querySelectorAll('.key'));
 
-keys.forEach((key) => key.addEventListener('click', getInput));
+keys.forEach((key) => key.addEventListener('click', showDisplay));
