@@ -1,3 +1,26 @@
+function calculator(arr) {
+    const a = +arr[0];
+    const op = arr[1];
+    const b = +arr[2];
+    let c;
+
+    switch (op) {
+        case '+':
+            c = a + b;
+            break;
+        case '-':
+            c = a - b;
+            break;
+        case '*':
+            c = a * b;
+            break;
+        case '':
+            c = a / b;
+    }
+
+    return c;
+}
+
 function getSecondNumber(char) {
     if (String(calcArr[2]).length >= 9) return;
 
@@ -21,6 +44,7 @@ function removeLeadingZero(string) {
 }
 
 function getNumber(string) {
+    console.log(calcArr);
     const num = string.split('').reduce((arr, current) => {
         if (current >= 0) {
             arr.push(current);
@@ -39,9 +63,6 @@ function getNumber(string) {
 }
 
 function showDisplay(e) {
-    console.log(display.textContent.length);
-    console.log(String(calcArr[0]).length);
-    console.log(String(calcArr[2]).length);
     if (display.textContent.length < 9) {
         display.textContent += e.target.textContent;
     }
