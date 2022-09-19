@@ -14,7 +14,7 @@ function calculator(arr) {
         case '*':
             c = a * b;
             break;
-        case '':
+        case '÷':
             c = a / b;
     }
 
@@ -24,15 +24,30 @@ function calculator(arr) {
 function getSecondNumber(char) {
     if (String(calcArr[2]).length >= 9) return;
 
+    if (calcArr[2] === null) {
+        calcArr[2] = 0;
+    }
+
     calcArr[2] = getNumber((calcArr[2] += char));
 
     return (display.textContent = calcArr[2]);
 }
 
 function getOperator(e) {
+    if (calcArr[2] === null) {
+        calcArr[0] = display.textContent;
+        calcArr[1] = e.target.textContent;
+
+        return;
+    }
+
+    display.textContent = calculator(calcArr);
+
     calcArr[0] = display.textContent;
     calcArr[1] = e.target.textContent;
-    calcArr[2] = 0;
+    calcArr[2] = null;
+
+    return;
 }
 
 function removeLeadingZero(string) {
@@ -44,7 +59,6 @@ function removeLeadingZero(string) {
 }
 
 function getNumber(string) {
-    console.log(calcArr);
     const num = string.split('').reduce((arr, current) => {
         if (current >= 0) {
             arr.push(current);
@@ -67,7 +81,7 @@ function showDisplay(e) {
         display.textContent += e.target.textContent;
     }
 
-    if (calcArr[2] !== null) {
+    if (calcArr[1] !== null) {
         getSecondNumber(e.target.textContent);
         return;
     }
