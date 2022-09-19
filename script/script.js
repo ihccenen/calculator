@@ -30,7 +30,7 @@ function getSecondNumber(char) {
 
     calcArr[2] = getNumber((calcArr[2] += char));
 
-    return (display.textContent = calcArr[2]);
+    display.textContent = calcArr[2];
 }
 
 function getOperator(e) {
@@ -46,8 +46,6 @@ function getOperator(e) {
     calcArr[0] = display.textContent;
     calcArr[1] = e.target.textContent;
     calcArr[2] = null;
-
-    return;
 }
 
 function removeLeadingZero(string) {
@@ -86,7 +84,7 @@ function showDisplay(e) {
         return;
     }
 
-    return (display.textContent = getNumber(display.textContent));
+    display.textContent = getNumber(display.textContent);
 }
 
 const display = document.querySelector('.display');
