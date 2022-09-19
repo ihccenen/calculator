@@ -41,11 +41,15 @@ function getOperator(e) {
         return;
     }
 
-    display.textContent = calculator(calcArr);
+    if (e.target.textContent === '=' && calcArr.indexOf(null) === -1) {
+        display.textContent = calculator(calcArr);
+    } else if (e.target.textContent !== '=') {
+        display.textContent = calculator(calcArr);
 
-    calcArr[0] = display.textContent;
-    calcArr[1] = e.target.textContent;
-    calcArr[2] = null;
+        calcArr[0] = display.textContent;
+        calcArr[1] = e.target.textContent;
+        calcArr[2] = null;
+    }
 }
 
 function removeLeadingZero(string) {
