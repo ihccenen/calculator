@@ -61,21 +61,24 @@ function removeLeadingZero(string) {
 }
 
 function getNumber(string) {
-    const num = string.split('').reduce((arr, current) => {
-        if (current >= 0) {
-            arr.push(current);
-        } else if (current === '.' && arr.indexOf('.') === -1 && arr.length < 8) {
-            arr.push(current);
-        }
+    const num = string
+        .split('')
+        .reduce((arr, current) => {
+            if (current >= 0) {
+                arr.push(current);
+            } else if (current === '.' && arr.indexOf('.') === -1 && arr.length < 8) {
+                arr.push(current);
+            }
 
-        return arr;
-    }, []);
+            return arr;
+        }, [])
+        .join('');
 
     if (num.indexOf('.') === -1) {
-        return removeLeadingZero(num.join(''));
+        return removeLeadingZero(num);
     }
 
-    return num.join('');
+    return num;
 }
 
 function showDisplay(e) {
