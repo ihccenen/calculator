@@ -19,7 +19,7 @@ function calculator(arr) {
             break;
     }
 
-    return c;
+    return String(c).indexOf('.') !== -1 ? c.toFixed(8) - 0 : c;
 }
 
 function getPercent() {
