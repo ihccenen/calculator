@@ -19,6 +19,9 @@ function calculator(arr) {
             break;
     }
 
+    calcArr[1] = null;
+    calcArr[2] = null;
+
     return String(c).indexOf('.') !== -1 ? c.toFixed(8) - 0 : c;
 }
 
@@ -97,7 +100,6 @@ function getOperator(e) {
 
     calcArr[0] = display.textContent;
     calcArr[1] = text;
-    calcArr[2] = null;
 }
 
 function removeLeadingZero(string) {
