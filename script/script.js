@@ -137,7 +137,7 @@ function getKey(e) {
     getOperator(e);
   } else if (e.key === 'Backspace' || e.key === 'Delete') {
     clearDisplay(e);
-  } else if (e.key >= 0) {
+  } else if (e.key >= 0 || e.key === '.') {
     showDisplay(e);
   }
 }
