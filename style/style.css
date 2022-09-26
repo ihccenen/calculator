@@ -1,58 +1,62 @@
+body {
+  height: 100vh;
+}
+
 body,
 .container,
 .display,
 .key {
-    font-family: "Roboto Mono", monospace;
-    color: #383838;
-    background-color: #eae7fa;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-family: 'Roboto Mono', monospace;
+  color: #383838;
+  background-color: #eae7fa;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container,
 .display,
 .key {
-    box-sizing: border-box;
-    border: 1px solid #665a81;
-    border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid #665a81;
+  border-radius: 10px;
 }
 
 .container {
-    max-width: 430px;
-    flex-wrap: wrap;
-    background-color: #9e9effb3;
-    gap: 1.5rem 0.97rem;
-    padding: 20px;
+  max-width: 430px;
+  flex-wrap: wrap;
+  background-color: #9e9effb3;
+  gap: 1.5rem 0.97rem;
+  padding: 20px;
 }
 
 .display {
-    font-size: 3.5rem;
-    width: 100%;
-    justify-content: end;
-    text-align: right;
-    padding: 0.5em 0.2em;
-    word-break: break-word;
-    background-color: #e9eef1;
+  font-size: 3.5rem;
+  width: 100%;
+  justify-content: end;
+  text-align: right;
+  padding: 0.5em 0.2em;
+  word-break: break-word;
+  background-color: #e9eef1;
 }
 
 .key {
-    font-size: 2.3rem;
-    width: 22%;
-    cursor: pointer;
-    user-select: none;
-    background-color: #e9eef159;
+  font-size: 2.3rem;
+  width: 22%;
+  cursor: pointer;
+  user-select: none;
+  background-color: #e9eef159;
 }
 
 .equals {
-    background-color: #b1d8b7;
+  background-color: #b1d8b7;
 }
 
 .key:hover {
-    background-color: #9e9eff;
+  background-color: #9e9eff;
 }
 
 .key:active {
-    background-color: #8e8ee6;
+  background-color: #8e8ee6;
 }
